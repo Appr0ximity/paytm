@@ -1,6 +1,9 @@
-const mongoose = require("mongoose")
+import dotenv from "dotenv"
+import mongoose from "mongoose"
 
-mongoose.connect('mongodb+srv://hvshekharmurthy:IB3uCeSUPKXxZ8ti@c1.ujnqw74.mongodb.net/paytm')
+dotenv.config()
+
+mongoose.connect(process.env.MONGO_URI)
 
 const {Schema} = mongoose
 

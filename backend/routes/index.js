@@ -1,6 +1,5 @@
-import { userRouter } from "./user"
-
-const express = require("express")
+import { userRouter } from "./user.js"
+import express from "express"
 
 const app = express()
 
