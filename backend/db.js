@@ -1,5 +1,5 @@
 import dotenv from "dotenv"
-import mongoose from "mongoose"
+import mongoose, { mongo } from "mongoose"
 
 dotenv.config()
 
@@ -14,4 +14,18 @@ const userSchema = new Schema({
     password: String
 })
 
+const accountSchema = new Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    balance: {
+        type: Number,
+        required: true
+    }
+})
+
+
+export const Account = mongoose.model("Account", accountSchema)
 export const User = mongoose.model("User", userSchema)

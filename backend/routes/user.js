@@ -2,9 +2,16 @@ import { JWT_SECRET } from "../config.js"
 import jwt from "jsonwebtoken"
 import express from "express"
 import zod from "zod"
-import { User } from "../db.js"
+import { Account, User } from "../db.js"
+import { authMiddleware } from "../middleware.js"
 
 const app = express()
+
+const userEdit = zod.object({
+    password: zod.string().min(8),
+    firstName: zod.string(),
+    lastName: zod.string()
+})
 
 const userSignup = zod.object({
     username: zod.string().email("Invalid email"),
@@ -21,6 +28,31 @@ const userSignin = zod.object({
 })
 
 export const userRouter = express.Router()
+
+userRouter.put("/", authMiddleware, async (req, res)=>{
+    const {password, firstname, lastname} = req.body
+    const credentials = {
+        password: password,
+        firstName: firstname,
+        lastName: lastname
+    }
+
+    const {success} = userEdit.safeParse(credentials)
+
+    if(!success){
+        return res.status(403).json({
+            message:"Invalid input format"
+        })
+    }
+    try {
+        await User.updateOne({_id:req.userId}, credentials)
+        res.status(200).json({
+            message:"Updated successfully"
+        })
+    } catch (error) {
+        return res.error(error)
+    }
+})
 
 userRouter.post("/signup", async (req, res)=>{
     const {username, firstname, lastname, password} = req.body
@@ -47,6 +79,10 @@ userRouter.post("/signup", async (req, res)=>{
         }
         const user = await User.create(credentials)
         const userID = user._id
+        await Account.create({
+            userId: userID,
+            balance: 1 + Math.random() * 10000
+        })
         const token = jwt.sign({
             userID
         }, JWT_SECRET)
@@ -103,5 +139,27 @@ userRouter.post("/signin", async (req,res)=>{
         message:"Welcome!",
         token: token
     })
+})
 
+userRouter.get("/bulk", async (req,res)=>{
+    const filter = req.query.filter || ""
+    const filteredUsers = await User.find({
+        $or:[{
+            firstName: {
+                "$regex": filter
+            }
+        }, {
+            lastName: {
+                "$regex": filter
+            }
+        }]
+    })
+    res.status(200).json({
+        user: filteredUsers.map(user=>({
+            username : user.username,
+            firstName : user.firstName,
+            lastName: user.lastName,
+            _id: user._id
+        }))
+    })
 })
