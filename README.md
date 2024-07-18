@@ -3,20 +3,20 @@
 ## Description
 
 This is my first full-stack project. Through this project, I have tried to implement all the web dev knowledge I have so far.
-> * The Application is built with Vite.
-> * I have used ReactJS in the frontend with Tailwind CSS for styling.
-> * ExpressJS and MongoDB is used in the backend.
-> * Essentially, frontend/backend folders are two different projects that need to be compiled seperately.
+* The Application is built with Vite.
+* I have used ReactJS in the frontend with Tailwind CSS for styling.
+* ExpressJS and MongoDB is used in the backend.
+* Essentially, frontend/backend folders are two different projects that need to be compiled seperately.
 
 ## Getting Started
 
 ### Downloading the program and installing dependencies
 
-* Running the program is simple. Just clone the repo:
+Clone the repo:
 ```
 git clone https://github.com/Appr0ximity/paytm.git
 ```
-* Installing dependencies for both frontend and backend
+Installing dependencies for both frontend and backend
 ```
 cd backend
 npm install
@@ -25,7 +25,7 @@ npm install
 ```
 
 ### Initialising the project(s)
-* Running the Project 
+Running the Project 
 ```
 cd backend
 node index.js
