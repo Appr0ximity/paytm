@@ -1,4 +1,4 @@
-import { BottomWarning } from "../components/BottomWarning"
+import { BottomText } from "../components/BottomText"
 import { Button } from "../components/Button"
 import { Heading } from "../components/Heading"
 import { InputBox } from "../components/InputBox"
@@ -13,11 +13,11 @@ export const Signup = () => {
         <InputBox placeholder="John" label={"First Name"} />
         <InputBox placeholder="Doe" label={"Last Name"} />
         <InputBox placeholder="johndoe@example.com" label={"Email"} />
-        <InputBox label={"Password"} />
+        <InputBox type={"password"} label={"Password"} />
         <div className="pt-4">
           <Button label={"Sign up"} />
         </div>
-        <BottomWarning label={"Already have an account?"} buttonText={"Sign in"} to={"/signin"} />
+        <BottomText label={"Already have an account?"} buttonText={"Sign in"} to={"/signin"} />
       </div>
     </div>
   </div>
