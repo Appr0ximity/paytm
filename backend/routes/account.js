@@ -3,9 +3,11 @@ import { Account } from "../db.js";
 import mongoose from "mongoose";
 import { authMiddleware } from "../middleware.js";
 
+const app = express()
+
 export const accountRouter = express.Router()
 
-accountRouter.get("balance", authMiddleware, async (req,res)=>{
+accountRouter.get("/balance", authMiddleware, async (req,res)=>{
     try {
         const account = await Account.findOne({
             userId: req.userId
@@ -46,7 +48,7 @@ accountRouter.post("/transfer", authMiddleware, async (req,res)=>{
     const toAccount = await Account.findOne({
         userId: to
     }).session(session)
-
+    
     if(!toAccount){
         return res.status(404).json({
             message:"Invalid Account!"

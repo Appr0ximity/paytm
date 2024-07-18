@@ -7,4 +7,4 @@ const app = express()
 export const rootRouter = express.Router()
 
 rootRouter.use("/user", userRouter)
-accountRouter.use("/account", accountRouter)
+rootRouter.use("/account", accountRouter)
