@@ -13,7 +13,7 @@ export function Signin (){
                 <InputBox placeholder={"johndoe@example.com"} label={"Email"}></InputBox>
                 <InputBox type={"password"} label={"Password"}></InputBox>
                 <div className="pt-4">
-                    <Button label={"Sign up"}></Button>
+                    <Button label={"Sign in"}></Button>
                 </div>
                 <BottomText label={"Don't have an account?"} buttonText={"Sign up"} to={"/signup"}></BottomText>
             </div>
