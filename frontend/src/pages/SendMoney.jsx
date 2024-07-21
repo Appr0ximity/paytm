@@ -1,4 +1,7 @@
+import { useSearchParams } from "react-router-dom"
+
 export const SendMoney = () => {
+    const [searchParams, setSearchParams] = useSearchParams()
     return <div className="flex justify-center h-screen bg-gray-100">
         <div className="h-full flex flex-col justify-center">
             <div
@@ -10,9 +13,9 @@ export const SendMoney = () => {
                 <div className="p-6">
                 <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center">
-                    <span className="text-white text-2xl">A</span>
+                    <span className="text-white text-2xl">{searchParams.get("name")[0]}</span>
                     </div>
-                    <h3 className="text-2xl font-semibold">Friend's Name</h3>
+                    <h3 className="text-2xl font-semibold">{searchParams.get("name")}</h3>
                 </div>
                 <div className="space-y-4">
                     <div className="space-y-2">
